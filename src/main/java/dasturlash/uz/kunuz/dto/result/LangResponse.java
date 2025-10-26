@@ -1,4 +1,4 @@
-package dasturlash.uz.kunuz.dto;
+package dasturlash.uz.kunuz.dto.result;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -17,4 +17,5 @@ Content-Type: application/json
 DELETE http://localhost:8080/api/v1/category/1
 
 ###
-GET http://localhost:8080/api/v1/category/lang/uz
+GET http://localhost:8080/api/v1/category/lang
+Accept-Language: UZ

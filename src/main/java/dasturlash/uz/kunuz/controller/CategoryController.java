@@ -2,8 +2,10 @@ package dasturlash.uz.kunuz.controller;
 
 
 import dasturlash.uz.kunuz.dto.CategoryDto;
-import dasturlash.uz.kunuz.dto.LangResponse;
+import dasturlash.uz.kunuz.dto.result.LangMapper;
+import dasturlash.uz.kunuz.dto.result.LangResponse;
 import dasturlash.uz.kunuz.entity.CategoryEntity;
+import dasturlash.uz.kunuz.enums.Lang;
 import dasturlash.uz.kunuz.service.CategoryService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +43,8 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.getAllByAdmin());
     }
 
-    @GetMapping("/lang/{ln}")
-    public ResponseEntity<List<LangResponse>> getAll(@PathVariable String ln) {
+    @GetMapping("/lang")
+    public ResponseEntity<List<LangMapper>> getAll(@RequestHeader(name = "Accept-Language", defaultValue = "UZ") Lang ln) {
         return ResponseEntity.ok(categoryService.getRegionsByLang(ln));
     }
 

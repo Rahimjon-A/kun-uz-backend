@@ -1,13 +1,12 @@
 package dasturlash.uz.kunuz.service;
 
 import dasturlash.uz.kunuz.dto.CategoryDto;
-import dasturlash.uz.kunuz.dto.LangResponse;
-import dasturlash.uz.kunuz.dto.RegionDto;
+import dasturlash.uz.kunuz.dto.result.LangMapper;
+import dasturlash.uz.kunuz.dto.result.LangResponse;
 import dasturlash.uz.kunuz.entity.CategoryEntity;
-import dasturlash.uz.kunuz.entity.RegionEntity;
+import dasturlash.uz.kunuz.enums.Lang;
 import dasturlash.uz.kunuz.exception.EntityException;
 import dasturlash.uz.kunuz.repository.CategoryRepository;
-import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -74,20 +73,7 @@ public class CategoryService {
         return repository.findAll();
     }
 
-    public List<LangResponse> getRegionsByLang(String lang) {
-        List<CategoryEntity> regions = repository.findAll();
-
-        return regions.stream()
-                .filter(CategoryEntity::getVisible)
-                .map(region -> {
-                    String name;
-                    switch (lang.toLowerCase()) {
-                        case "ru" -> name = region.getNameRu();
-                        case "en" -> name = region.getNameEn();
-                        default -> name = region.getNameUz();
-                    }
-                    return new LangResponse(region.getId(), region.getCategoryKey(), name);
-                })
-                .toList();
+    public List<LangMapper> getRegionsByLang(Lang lang) {
+        return repository.getByLang(lang.name());
     }
 }
